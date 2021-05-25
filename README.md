@@ -7,7 +7,6 @@
 `node app.js`
 
 The temporary / permanent failures appear to only show that in the dashboard (worth checking with other teams how they check these)
-s
 ### SMS URLs
 
 success http://localhost:3000?methodId=sms&templateId=reasonOneSms&contact=07700900001
