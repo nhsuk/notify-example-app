@@ -7,21 +7,116 @@
 `node app.js`
 
 The temporary / permanent failures appear to only show that in the dashboard (worth checking with other teams how they check these)
-### SMS URLs
+## Examples
 
-success http://localhost:3000?methodId=sms&templateId=reasonOneSms&contact=07700900001
+### SMS success
+```
+curl --location --request POST 'http://localhost:3000/sms' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "reasonCode": 3006,
+    "user": {
+        "firstName": "tom",
+        "lastName": "doughty",
+        "phoneNumber": "07700900001"
+    }
+}'
+```
 
-error (using email template) http://localhost:3000?methodId=sms&templateId=reasonOneEmail&contact=07700900001
+### SMS error (invalid number)
+```
+curl --location --request POST 'http://localhost:3000/sms' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "reasonCode": 3006,
+    "user": {
+        "firstName": "tom",
+        "lastName": "doughty",
+        "phoneNumber": "01234567890"
+    }
+}'
+```
 
-temporary-failure http://localhost:3000?methodId=sms&templateId=reasonOneSms&contact=07700900003
+### SMS temporary failure
+```
+curl --location --request POST 'http://localhost:3000/sms' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "reasonCode": 3006,
+    "user": {
+        "firstName": "tom",
+        "lastName": "doughty",
+        "phoneNumber": "07700900003"
+    }
+}'
+```	
 
-permanent-failure http://localhost:3000?methodId=sms&templateId=reasonOneSms&contact=07700900002
+### SMS permanent failure
+```
+curl --location --request POST 'http://localhost:3000/sms' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "reasonCode": 3006,
+    "user": {
+        "firstName": "tom",
+        "lastName": "doughty",
+        "phoneNumber": "07700900002"
+    }
+}'
+```	
 
-### Email URLs
-success http://localhost:3000?methodId=email&templateId=reasonOneEmail&contact=test@test.com
+### Email success
+```
+curl --location --request POST 'http://localhost:3000/email' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "reasonCode": 3006,
+    "user": {
+        "firstName": "tom",
+        "lastName": "doughty",
+        "emailAddress": "tom.doughty1@nhs.net"
+    }
+}'
+```
 
-error (using sms template) http://localhost:3000?methodId=email&templateId=reasonOneSms&contact=test@test.com
+### Email error (invalid email)
+```
+curl --location --request POST 'http://localhost:3000/email' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "reasonCode": 3006,
+    "user": {
+        "firstName": "tom",
+        "lastName": "doughty",
+        "emailAddress": "tom.doughty1@nhsnet"
+    }
+}'
+```
 
-temporary-failure http://localhost:3000?methodId=email&templateId=reasonOneEmail&contact=temp-fail@simulator.notify	
+### Email temporary failure
+```
+curl --location --request POST 'http://localhost:3000/email' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "reasonCode": 3006,
+    "user": {
+        "firstName": "tom",
+        "lastName": "doughty",
+        "emailAddress": "temp-fail@simulator.notify"
+    }
+}'
+```	
 
-permanent-failure http://localhost:3000?methodId=email&templateId=reasonOneEmail&contact=perm-fail@simulator.notify
+### Email permanent failure
+```
+curl --location --request POST 'http://localhost:3000/email' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "reasonCode": 3006,
+    "user": {
+        "firstName": "tom",
+        "lastName": "doughty",
+        "emailAddress": "perm-fail@simulator.notify"
+    }
+}'
+```	
